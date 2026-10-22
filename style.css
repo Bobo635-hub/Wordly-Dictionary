@@ -1,0 +1,192 @@
+/* ===== 1. Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== 2. Whole page ===== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f0ff, #eef2ff);
+    color: #29243b;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ===== 3. Header ===== */
+header {
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 25px rgba(109, 40, 217, 0.2);
+}
+
+header h1 {
+    font-size: 2.7rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #f3e8ff;
+}
+
+/* ===== 4. Main content ===== */
+main {
+    width: 90%;
+    max-width: 850px;
+    margin: 40px auto;
+}
+
+section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 28px;
+    border-radius: 22px;
+    border: 1px solid #eee5ff;
+    box-shadow: 0 8px 30px rgba(46, 16, 101, 0.08);
+}
+
+h2 {
+    color: #6d28d9;
+    margin-bottom: 18px;
+}
+
+/* ===== 5. Search form ===== */
+#search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+#search-form label {
+    width: 100%;
+    font-weight: 600;
+}
+
+#word-input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 2px solid #e5ddf7;
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#word-input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px #ede9fe;
+}
+
+#search-form button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3);
+}
+
+/* ===== 6. Search results ===== */
+#result {
+    margin-top: 25px;
+    overflow-wrap: anywhere;
+}
+
+#result h2,
+#result h3 {
+    margin-bottom: 10px;
+}
+
+#result p {
+    margin-bottom: 12px;
+}
+
+#result button {
+    padding: 9px 14px;
+    border: none;
+    border-radius: 9px;
+    background: #ede9fe;
+    color: #6d28d9;
+    cursor: pointer;
+}
+
+/* ===== 7. Loading and errors ===== */
+#loading {
+    text-align: center;
+    color: #6d28d9;
+    font-weight: 600;
+    margin: 20px auto;
+}
+
+#error-message {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 850px;
+}
+
+/* ===== 8. Word of the Day ===== */
+#word-of-the-day {
+    background: #f5f0ff;
+    padding: 22px;
+    border-radius: 15px;
+    border-left: 5px solid #8b5cf6;
+}
+
+#word-of-the-day p {
+    margin-bottom: 8px;
+}
+
+/* ===== 9. Footer ===== */
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    color: #716783;
+}
+
+/* ===== 10. Mobile-friendly design ===== */
+@media (max-width: 600px) {
+    header {
+        padding: 38px 18px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    #search-form {
+        flex-direction: column;
+    }
+
+    #word-input,
+    #search-form button {
+        width: 100%;
+    }
+}
