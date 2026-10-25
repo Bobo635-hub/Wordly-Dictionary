@@ -26,7 +26,7 @@ searchForm.addEventListener('submit', async (event) => {
         const data = await response.json();
         console.log('API data:', data);
         console.log('Pronunciation data:', data.en?.[0]);
-        console.log('First entry:', data.en?.[0]);
+        console.log('First entry:',data.en?.[0]);
         const entries = data.en || [];
 
         if (!entries || entries.length === 0) {
