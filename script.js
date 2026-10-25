@@ -24,7 +24,8 @@ searchForm.addEventListener('submit', async (event) => {
         }
 
         const data = await response.json();
-        const entries =data.en;
+        console.log('API data:', data);
+        const entries =data.en || [];
 
         if (!entries || entries.length === 0) {
             throw new Error('No definitions found');
@@ -47,7 +48,16 @@ searchForm.addEventListener('submit', async (event) => {
                 const parser = new DOMParser();
                 const parsedDefinition = parser.parseFromString(item.definition, 'text/html');
                 definition.textContent = parsedDefinition.body.textContent.trim();
-                result.appendChild(definition);
+
+                if (item.examples && item.examples.length > 0) {
+                    const exampleHeading = document.createElement('p');
+                    const example = document.createElement('p');
+                    example.className = 'example';
+                    exampleHeading.textContent = 'Example:';{item.example[0]};
+                    result.appendChild(example);
+
+                    result.appendChild(definition);
+                }
             });
         });
 
