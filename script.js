@@ -25,6 +25,7 @@ searchForm.addEventListener('submit', async (event) => {
 
         const data = await response.json();
         console.log('API data:', data);
+        console.log('First entry:', data.en?.[0]);
         const entries = data.en || [];
 
         if (!entries || entries.length === 0) {
@@ -62,9 +63,14 @@ searchForm.addEventListener('submit', async (event) => {
 
                     const example = document.createElement('p');
                     example.className = 'example';
-                    const parsedExample = parser.parseFromString(item.examples[0], 'text/html');
+
+                    const exampleText = typeof item.examples[0] === 'string' ? item.examples[0] : item.examples[0].text || '';
+
+                    const parsedExample = parser.parseFromString(exampleText, 'text/html');
                     example.textContent = parsedExample.body.textContent.trim();
-                    result.appendChild(example);
+                    if (example.textContent) {
+                        result.appendChild(example);
+                    }
                 }
             });
         });
