@@ -25,7 +25,7 @@ searchForm.addEventListener('submit', async (event) => {
 
         const data = await response.json();
         console.log('API data:', data);
-        const entries =data.en || [];
+        const entries = data.en || [];
 
         if (!entries || entries.length === 0) {
             throw new Error('No definitions found');
@@ -38,8 +38,12 @@ searchForm.addEventListener('submit', async (event) => {
         result.appendChild(heading);
 
         entries.forEach((entry) => {
+            if (!entry.definitions || entry.definitions.length === 0) {
+                return;
+            }
+
             const partOfSpeech = document.createElement('h3');
-            partOfSpeech.textContent = entry.partOfSpeech || `meaning`;
+            partOfSpeech.textContent = entry.partOfSpeech || 'Meaning';
             result.appendChild(partOfSpeech);
 
             entry.definitions.forEach((item) => {
@@ -48,6 +52,8 @@ searchForm.addEventListener('submit', async (event) => {
                 const parser = new DOMParser();
                 const parsedDefinition = parser.parseFromString(item.definition, 'text/html');
                 definition.textContent = parsedDefinition.body.textContent.trim();
+
+                result.appendChild(definition);
 
                 if (item.examples && item.examples.length > 0) {
                     const exampleHeading = document.createElement('p');
@@ -59,12 +65,11 @@ searchForm.addEventListener('submit', async (event) => {
                     const parsedExample = parser.parseFromString(item.examples[0], 'text/html');
                     example.textContent = parsedExample.body.textContent.trim();
                     result.appendChild(example);
-
                 }
             });
         });
 
-    }catch (error) {
+    } catch (error) {
         result.textContent = '';
         errorMessage.textContent = error.message;
         errorMessage.hidden = false;
