@@ -38,8 +38,25 @@ searchForm.addEventListener('submit', async (event) => {
         const heading = document.createElement('h2');
         heading.textContent = word;
         result.appendChild(heading);
+        const audioButton = document.createElement('button');
+        audioButton.textContent = '🔊 Play Pronunciation';
+        audioButton.type = 'button';
+ 
+        audioButton.addEventListener('click', () => {
+    const audioUrl = data.en?.[0]?.pronunciations?.[0]?.audio?.[0]?.url;
 
-        
+    if (audioUrl) {
+        const audio = new Audio(audioUrl);
+        audio.play();
+    } else {
+        const speech = new SpeechSynthesisUtterance(word);
+        speech.lang = 'en-US';
+        window.speechSynthesis.speak(speech);
+    }
+        });
+
+        result.appendChild(audioButton); 
+
         entries.forEach((entry) => {
             if (!entry.definitions || entry.definitions.length === 0) {
                 return;
