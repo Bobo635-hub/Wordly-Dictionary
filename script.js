@@ -11,12 +11,6 @@ function displayFavourites() {
     favourites.forEach((word) => {
         const listItem = document.createElement('li');
         listItem.textContent = word;
-        function displayFavourites() {
-    favouritesList.innerHTML = '';
-
-    favourites.forEach((word) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = word;
 
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
@@ -33,8 +27,6 @@ function displayFavourites() {
 }
 
 displayFavourites();
-    });
-}
 
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
