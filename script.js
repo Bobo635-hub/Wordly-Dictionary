@@ -1,8 +1,40 @@
 const searchForm = document.getElementById('search-form');
 const wordInput = document.getElementById('word-input');
-const result = document.getElementById('result');
+const result = document.getElementById('result');   
 const loading = document.getElementById('loading-message');
 const errorMessage = document.getElementById('error-message');  
+const favouritesList = document.getElementById('favourites-list');
+
+let favourites = [];
+function displayFavourites() {
+    favouritesList.innerHTML = '';
+    favourites.forEach((word) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = word;
+        function displayFavourites() {
+    favouritesList.innerHTML = '';
+
+    favourites.forEach((word) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = word;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.type = 'button';
+
+        removeButton.addEventListener('click', () => {
+            favourites = favourites.filter((favourite) => favourite !== word);
+            displayFavourites();
+        });
+
+        listItem.appendChild(removeButton);
+        favouritesList.appendChild(listItem);
+    });
+}
+
+displayFavourites();
+    });
+}
 
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -38,6 +70,23 @@ searchForm.addEventListener('submit', async (event) => {
         const heading = document.createElement('h2');
         heading.textContent = word;
         result.appendChild(heading);
+        const favouriteButton = document.createElement('button');
+        favouriteButton.type = 'button';
+        function updateFavouriteButton() {
+            favouriteButton.textContent = favourites.includes(word) ? 'Remove from Favourites' : 'Add to Favourites';
+        }
+        updateFavouriteButton();
+        favouriteButton.addEventListener('click', () => {
+            if (favourites.includes(word)) {
+                favourites = favourites.filter((favourite) => favourite !== word);
+            } else {
+                favourites.push(word);
+            }
+            updateFavouriteButton();
+            displayFavourites();
+        });
+        result.appendChild(favouriteButton);
+
         const audioButton = document.createElement('button');
         audioButton.textContent = '🔊 Play Pronunciation';
         audioButton.type = 'button';
