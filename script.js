@@ -51,12 +51,15 @@ searchForm.addEventListener('submit', async (event) => {
 
                 if (item.examples && item.examples.length > 0) {
                     const exampleHeading = document.createElement('p');
+                    exampleHeading.textContent = 'Example:';
+                    result.appendChild(exampleHeading);
+
                     const example = document.createElement('p');
                     example.className = 'example';
-                    exampleHeading.textContent = 'Example:';{item.example[0]};
+                    const parsedExample = parser.parseFromString(item.examples[0], 'text/html');
+                    example.textContent = parsedExample.body.textContent.trim();
                     result.appendChild(example);
 
-                    result.appendChild(definition);
                 }
             });
         });
