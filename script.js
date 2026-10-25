@@ -95,10 +95,18 @@ searchForm.addEventListener('submit', async (event) => {
         });
 
     } catch (error) {
-        result.textContent = '';
-        errorMessage.textContent = error.message;
-        errorMessage.hidden = false;
-    } finally {
-        loading.hidden = true;
+    result.innerHTML = '';
+
+    if (!navigator.onLine) {
+        errorMessage.textContent = 'You appear to be offline. Please check your internet connection.';
+    } else if (error instanceof TypeError) {
+        errorMessage.textContent = 'Unable to connect to the dictionary. Please try again.';
+    } else {
+        errorMessage.textContent = 'Sorry, we could not find definitions for that word. Please try another word.';
     }
+
+    errorMessage.hidden = false;
+} finally {
+    loading.hidden = true;
+}
 });
